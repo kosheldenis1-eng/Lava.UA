@@ -17,7 +17,7 @@
     font-family: 'Nunito', sans-serif;
     background: #f5f0fa;
     color: #1e1a2f;
-    padding-bottom: 20px;
+    min-height: 100vh;
   }
 
   :root {
@@ -27,8 +27,6 @@
     --gold: #ffcd3c;
     --green: #06d6a0;
     --orange: #ff9f1c;
-    --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 12px 32px rgba(123, 44, 191, 0.12);
   }
 
   /* ШАПКА */
@@ -62,7 +60,7 @@
     flex-wrap: wrap;
   }
 
-  .back-home, .go-to-site {
+  .go-to-site, .back-home {
     display: inline-block;
     background: rgba(255,255,255,0.2);
     color: white;
@@ -80,7 +78,7 @@
     background: linear-gradient(135deg, #f58529, #dd2a7b);
   }
 
-  .back-home:hover, .go-to-site:hover {
+  .go-to-site:hover, .back-home:hover {
     transform: translateY(-2px);
     background: rgba(255,255,255,0.3);
   }
@@ -92,13 +90,13 @@
     padding: 24px;
   }
 
-  /* ФОРМА ДОДАВАННЯ ТОВАРУ */
+  /* ФОРМА ДОДАВАННЯ */
   .add-product-form {
     background: white;
     border-radius: 40px;
     padding: 28px;
     margin-bottom: 32px;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
   }
 
   .form-title {
@@ -106,9 +104,6 @@
     font-size: 28px;
     color: var(--purple-dark);
     margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
   }
 
   .form-grid {
@@ -126,7 +121,6 @@
   .form-group label {
     font-weight: 800;
     color: var(--purple-dark);
-    font-size: 14px;
   }
 
   .form-group input, .form-group select, .form-group textarea {
@@ -135,17 +129,11 @@
     border-radius: 20px;
     font-family: 'Nunito', sans-serif;
     font-size: 14px;
-    transition: 0.2s;
   }
 
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
     outline: none;
     border-color: var(--purple);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 80px;
   }
 
   .full-width {
@@ -164,48 +152,6 @@
     cursor: pointer;
   }
 
-  .image-preview {
-    width: 100px;
-    height: 100px;
-    background: #f5f0fa;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 50px;
-    margin-top: 8px;
-    border: 2px dashed #ddd;
-    overflow: hidden;
-  }
-
-  .image-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .image-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-
-  .image-tab {
-    padding: 6px 14px;
-    background: #f0e9fa;
-    border-radius: 40px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    transition: 0.2s;
-  }
-
-  .image-tab.active {
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    color: white;
-  }
-
   .btn-submit {
     background: linear-gradient(135deg, var(--green), #00b4d8);
     color: white;
@@ -215,14 +161,12 @@
     border: none;
     border-radius: 60px;
     cursor: pointer;
-    transition: 0.2s;
     margin-top: 16px;
     width: 100%;
   }
 
   .btn-submit:hover {
     transform: scale(1.02);
-    box-shadow: 0 8px 20px rgba(6,214,160,0.3);
   }
 
   /* СПИСОК ТОВАРІВ */
@@ -230,7 +174,7 @@
     background: white;
     border-radius: 40px;
     padding: 28px;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
   }
 
   .products-header {
@@ -273,7 +217,7 @@
     cursor: pointer;
   }
 
-  /* ТАБЛИЦЯ ТОВАРІВ */
+  /* ТАБЛИЦЯ */
   .products-table {
     overflow-x: auto;
   }
@@ -295,25 +239,8 @@
     color: var(--purple-dark);
   }
 
-  .product-image-cell {
-    width: 70px;
-  }
-
-  .product-image-cell img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 12px;
-  }
-
   .product-emoji {
     font-size: 40px;
-  }
-
-  .product-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
   }
 
   .edit-btn, .delete-btn {
@@ -322,7 +249,7 @@
     border: none;
     font-weight: 700;
     cursor: pointer;
-    transition: 0.2s;
+    margin: 0 4px;
   }
 
   .edit-btn {
@@ -359,7 +286,7 @@
     display: inline-block;
   }
 
-  /* МОДАЛЬНЕ ВІКНО РЕДАГУВАННЯ */
+  /* МОДАЛЬНЕ ВІКНО */
   .modal {
     display: none;
     position: fixed;
@@ -371,7 +298,6 @@
     z-index: 1000;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(5px);
   }
 
   .modal.active {
@@ -381,53 +307,17 @@
   .modal-content {
     background: white;
     border-radius: 48px;
-    max-width: 650px;
+    max-width: 600px;
     width: 90%;
     max-height: 85vh;
     overflow-y: auto;
     padding: 32px;
-    position: relative;
   }
 
   .modal-close {
-    position: sticky;
-    top: 0;
     float: right;
     font-size: 28px;
     cursor: pointer;
-    background: white;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal-title {
-    font-family: 'Paytone One', sans-serif;
-    font-size: 28px;
-    color: var(--purple-dark);
-    margin: 16px 0 24px;
-  }
-
-  .modal-form-group {
-    margin-bottom: 16px;
-  }
-
-  .modal-form-group label {
-    display: block;
-    font-weight: 800;
-    margin-bottom: 6px;
-    color: var(--purple-dark);
-  }
-
-  .modal-form-group input, .modal-form-group select, .modal-form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #f0e6f5;
-    border-radius: 20px;
-    font-family: 'Nunito', sans-serif;
   }
 
   .modal-save-btn {
@@ -442,12 +332,6 @@
     margin-top: 16px;
   }
 
-  .empty-state {
-    text-align: center;
-    padding: 48px;
-    color: #aaa;
-  }
-
   .toast {
     position: fixed;
     bottom: 30px;
@@ -456,7 +340,6 @@
     color: white;
     padding: 12px 24px;
     border-radius: 60px;
-    font-weight: 700;
     z-index: 1001;
     animation: slideIn 0.3s ease;
   }
@@ -467,7 +350,7 @@
   }
 
   /* ЛОГІН МОДАЛКА */
-  .login-modal {
+  .login-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -479,6 +362,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .login-box {
     background: white;
     border-radius: 48px;
@@ -487,11 +371,13 @@
     max-width: 400px;
     width: 90%;
   }
+
   .login-box h2 {
     font-family: 'Paytone One', sans-serif;
     margin-bottom: 24px;
     color: var(--purple-dark);
   }
+
   .login-box input {
     width: 100%;
     padding: 14px;
@@ -501,6 +387,7 @@
     font-size: 16px;
     text-align: center;
   }
+
   .login-btn {
     background: linear-gradient(135deg, var(--purple), var(--pink));
     color: white;
@@ -511,20 +398,36 @@
     width: 100%;
     cursor: pointer;
   }
+
   .error-msg {
     color: #ff5c8a;
     margin-top: 12px;
     font-size: 14px;
   }
 
+  .empty-state {
+    text-align: center;
+    padding: 48px;
+    color: #aaa;
+  }
+
   @media (max-width: 768px) {
     .form-grid { grid-template-columns: 1fr; }
     th, td { font-size: 12px; padding: 10px 6px; }
-    .product-actions { flex-direction: column; gap: 6px; }
   }
 </style>
 </head>
 <body>
+
+<div id="loginOverlay" class="login-overlay">
+  <div class="login-box">
+    <h2><i class="fas fa-user-shield"></i> Вхід в адмінку</h2>
+    <input type="text" id="loginUsername" placeholder="Логін" autocomplete="off">
+    <input type="password" id="loginPassword" placeholder="Пароль">
+    <button class="login-btn" id="doLoginBtn">Увійти</button>
+    <div id="loginError" class="error-msg"></div>
+  </div>
+</div>
 
 <div class="admin-header">
   <h1><i class="fas fa-user-shield"></i> СвятоЛаб Адмін</h1>
@@ -535,32 +438,17 @@
   </div>
 </div>
 
-<div class="admin-container" id="adminContainer" style="display: none;">
-  <!-- ФОРМА ДОДАВАННЯ ТОВАРУ -->
+<div id="adminContainer" class="admin-container" style="display: none;">
+  <!-- ФОРМА ДОДАВАННЯ -->
   <div class="add-product-form">
-    <div class="form-title">
-      <i class="fas fa-plus-circle" style="color: var(--green);"></i>
-      Додати новий товар
-    </div>
+    <div class="form-title"><i class="fas fa-plus-circle"></i> Додати новий товар</div>
     <div class="form-grid">
+      <div class="form-group"><label>Фото (емодзі)</label><input type="text" id="newEmoji" value="🎁"></div>
+      <div class="form-group"><label>Назва товару *</label><input type="text" id="newName" placeholder="Введіть назву"></div>
+      <div class="form-group"><label>Ціна (грн) *</label><input type="number" id="newPrice" placeholder="Ціна"></div>
+      <div class="form-group"><label>Акційна ціна (грн)</label><input type="number" id="newOldPrice" placeholder="Залиште порожнім"></div>
       <div class="form-group">
-        <label><i class="fas fa-image"></i> Зображення (емодзі)</label>
-        <input type="text" id="newEmoji" placeholder="Введіть емодзі (наприклад: 🎈)" value="🎁">
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-tag"></i> Назва товару *</label>
-        <input type="text" id="newName" placeholder="Введіть назву">
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-dollar-sign"></i> Звичайна ціна (грн) *</label>
-        <input type="number" id="newPrice" placeholder="Ціна">
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-percent"></i> Акційна ціна (грн)</label>
-        <input type="number" id="newOldPrice" placeholder="Залиште порожнім, якщо немає акції">
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-list"></i> Категорія</label>
+        <label>Категорія</label>
         <select id="newCategory">
           <option value="costumes">🦸 Костюми</option>
           <option value="gifts">🎁 Подарунки</option>
@@ -571,21 +459,13 @@
         </select>
       </div>
       <div class="form-group checkbox-group">
-        <label><i class="fas fa-fire"></i> Хіт продажу</label>
+        <label>🔥 Хіт продажу</label>
         <input type="checkbox" id="newIsHit">
       </div>
-      <div class="form-group full-width">
-        <label><i class="fas fa-align-left"></i> Опис товару</label>
-        <textarea id="newDescription" rows="3" placeholder="Детальний опис товару..."></textarea>
-      </div>
-      <div class="form-group full-width">
-        <label><i class="fas fa-list-ul"></i> Характеристики (через кому)</label>
-        <textarea id="newFeatures" rows="2" placeholder="Наприклад: Висока якість, 50 кульок, Яскраві кольори"></textarea>
-      </div>
+      <div class="form-group full-width"><label>Опис товару</label><textarea id="newDescription" rows="3"></textarea></div>
+      <div class="form-group full-width"><label>Характеристики (через кому)</label><textarea id="newFeatures" rows="2"></textarea></div>
     </div>
-    <button class="btn-submit" id="addProductBtn">
-      <i class="fas fa-plus"></i> Додати товар
-    </button>
+    <button class="btn-submit" id="addProductBtn"><i class="fas fa-plus"></i> Додати товар</button>
   </div>
 
   <!-- СПИСОК ТОВАРІВ -->
@@ -593,46 +473,44 @@
     <div class="products-header">
       <h2><i class="fas fa-boxes"></i> Всі товари</h2>
       <div class="search-admin">
-        <input type="text" id="searchProducts" placeholder="Пошук за назвою...">
+        <input type="text" id="searchProducts" placeholder="Пошук...">
         <button id="searchBtn"><i class="fas fa-search"></i></button>
       </div>
     </div>
     <div class="products-table">
-      <table id="productsTable">
-        <thead>
-          <tr><th>Фото</th><th>Назва</th><th>Ціна</th><th>Акція</th><th>Категорія</th><th>Хіт</th><th>Дії</th></tr>
-        </thead>
-        <tbody id="productsTableBody">
-          <tr><td colspan="7" class="empty-state">Завантаження...</td></tr>
-        </tbody>
-      </table>
+      <table>
+        <thead><tr><th>Фото</th><th>Назва</th><th>Ціна</th><th>Акція</th><th>Категорія</th><th>Хіт</th><th>Дії</th></tr></thead>
+        <tbody id="productsTableBody"></tbody>
+       </table>
     </div>
   </div>
 </div>
 
-<!-- МОДАЛЬНЕ ВІКНО РЕДАГУВАННЯ -->
 <div class="modal" id="editModal">
   <div class="modal-content">
     <div class="modal-close">&times;</div>
-    <div class="modal-title"><i class="fas fa-edit"></i> Редагування товару</div>
+    <h3 style="font-family:'Paytone One'; margin-bottom:20px;"><i class="fas fa-edit"></i> Редагування товару</h3>
     <div id="editFormContainer"></div>
   </div>
 </div>
 
 <script>
-  // ========== ПОЧАТКОВІ ТОВАРИ ==========
+  // ПОЧАТКОВІ ТОВАРИ
   let products = [
-    { id: 1, name: "Костюм Супергероя", price: 350, oldPrice: null, emoji: "🦸", category: "costumes", isHit: true, description: "Костюм супергероя для дітей та дорослих. Розміри S-XXL. Оренда на 1 день.", features: ["Розміри S-XXL", "Оренда", "Маска в комплекті"] },
-    { id: 2, name: "Костюм Принцеси", price: 320, oldPrice: null, emoji: "👸", category: "costumes", isHit: false, description: "Чарівний костюм принцеси. Пишна спідниця, корона в комплекті.", features: ["Корона", "Пишна спідниця", "Оренда"] },
-    { id: 3, name: "Подарункова коробка преміум", price: 79, oldPrice: 129, emoji: "📦", category: "gifts", isHit: true, description: "Елегантна подарункова коробка з кришкою. Підходить для будь-якого подарунка.", features: ["З кришкою", "Стрічка в комплекті"] },
-    { id: 4, name: "Набір кульок 'Веселка'", price: 129, oldPrice: 179, emoji: "🎈", category: "balloons", isHit: true, description: "Яскравий набір із 50 кульок різних кольорів.", features: ["50 кульок", "10 кольорів"] },
-    { id: 5, name: "Їстівний букет з полуниці", price: 450, oldPrice: 599, emoji: "🍓", category: "edible", isHit: true, description: "Смачний букет із полуниці в шоколаді.", features: ["Полуниця", "Білий шоколад"] },
-    { id: 6, name: "Гірлянда 'Вечірка'", price: 89, oldPrice: null, emoji: "🎊", category: "decor", isHit: false, description: "Гірлянда довжиною 3 метри. Святкові прапорці.", features: ["3 метри", "12 прапорців"] }
+    { id: 1, name: "Костюм Супергероя", price: 350, oldPrice: null, emoji: "🦸", category: "costumes", isHit: true, description: "Костюм супергероя. Розміри S-XXL. Оренда 1 день.", features: ["Розміри S-XXL", "Маска в комплекті"] },
+    { id: 2, name: "Костюм Принцеси", price: 320, oldPrice: null, emoji: "👸", category: "costumes", isHit: false, description: "Чарівний костюм принцеси. Корона в комплекті.", features: ["Корона", "Пишна спідниця"] },
+    { id: 3, name: "Подарункова коробка", price: 79, oldPrice: 129, emoji: "📦", category: "gifts", isHit: true, description: "Елегантна коробка з кришкою.", features: ["З кришкою", "Стрічка"] },
+    { id: 4, name: "Набір кульок 'Веселка'", price: 129, oldPrice: 179, emoji: "🎈", category: "balloons", isHit: true, description: "50 кульок різних кольорів.", features: ["50 кульок", "10 кольорів"] },
+    { id: 5, name: "Їстівний букет полуниці", price: 450, oldPrice: 599, emoji: "🍓", category: "edible", isHit: true, description: "Полуниця в шоколаді.", features: ["Полуниця", "Шоколад"] },
+    { id: 6, name: "Гірлянда 'Вечірка'", price: 89, oldPrice: null, emoji: "🎊", category: "decor", isHit: false, description: "Гірлянда 3 метри.", features: ["3 метри", "12 прапорців"] }
   ];
 
-  let isLoggedIn = false;
+  let searchQuery = '';
 
-  // Завантаження/збереження
+  function saveProducts() {
+    localStorage.setItem('svyatolab_products', JSON.stringify(products));
+  }
+
   function loadProducts() {
     const saved = localStorage.getItem('svyatolab_products');
     if (saved) {
@@ -642,185 +520,85 @@
     }
   }
 
-  function saveProducts() {
-    localStorage.setItem('svyatolab_products', JSON.stringify(products));
-  }
-
-  function showToast(message, isError = false) {
+  function showToast(msg) {
     const toast = document.createElement('div');
     toast.className = 'toast';
-    toast.style.background = isError ? 'linear-gradient(135deg, #ff5c8a, #ff2d6e)' : 'linear-gradient(135deg, #06d6a0, #00b4d8)';
-    toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
+    toast.innerHTML = msg;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 2500);
   }
 
-  // Відображення фото
-  function renderProductImage(product) {
-    if (product.emoji) {
-      return `<span style="font-size:40px;">${product.emoji}</span>`;
-    }
-    return `<span style="font-size:40px;">🎁</span>`;
-  }
-
-  function getCategoryName(category) {
+  function getCategoryName(cat) {
     const names = {
-      'costumes': '🦸 Костюми',
-      'gifts': '🎁 Подарунки',
-      'birthday': '🎂 День народження',
-      'decor': '🎊 Декор',
-      'edible': '🍬 Їстівні букети',
-      'balloons': '🎈 Шари'
+      costumes: '🦸 Костюми', gifts: '🎁 Подарунки', birthday: '🎂 День народження',
+      decor: '🎊 Декор', edible: '🍬 Їстівні букети', balloons: '🎈 Шари'
     };
-    return names[category] || category;
+    return names[cat] || cat;
   }
 
-  // Рендер таблиці
-  let searchQuery = '';
   function renderProductsTable() {
     const tbody = document.getElementById('productsTableBody');
-    if (!tbody) return;
-    
-    let filtered = products.filter(p => 
-      p.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    
+    let filtered = products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
     if (filtered.length === 0) {
       tbody.innerHTML = '<tr><td colspan="7" class="empty-state">📦 Немає товарів. Додайте перший!</td></tr>';
       return;
     }
-    
     tbody.innerHTML = filtered.map(p => `
       <tr>
-        <td class="product-image-cell">${renderProductImage(p)}</td>
-        <td><strong>${p.name}</strong><br><small style="color:#888;">${p.description ? p.description.substring(0, 40) + '...' : 'Немає опису'}</small></td>
-        <td><strong>${p.price} грн</strong></td>
+        <td style="font-size:40px">${p.emoji || '🎁'}</td>
+        <td><strong>${p.name}</strong><br><small>${p.description?.substring(0, 40) || ''}</small></td>
+        <td>${p.price} грн</td>
         <td>${p.oldPrice ? `<span class="sale-badge">-${Math.round((1 - p.price/p.oldPrice)*100)}%</span><br><span style="font-size:12px; text-decoration:line-through;">${p.oldPrice} грн</span>` : '-'}</td>
         <td>${getCategoryName(p.category)}</td>
         <td>${p.isHit ? '<span class="hit-badge">🔥 Хіт</span>' : '-'}</td>
-        <td class="product-actions">
-          <button class="edit-btn" data-id="${p.id}"><i class="fas fa-edit"></i> Ред.</button>
-          <button class="delete-btn" data-id="${p.id}"><i class="fas fa-trash"></i> Вид.</button>
-        </td>
+        <td><button class="edit-btn" data-id="${p.id}"><i class="fas fa-edit"></i> Ред</button> <button class="delete-btn" data-id="${p.id}"><i class="fas fa-trash"></i> Вид</button></td>
       </tr>
     `).join('');
     
     document.querySelectorAll('.edit-btn').forEach(btn => {
-      btn.addEventListener('click', () => openEditModal(parseInt(btn.dataset.id)));
+      btn.onclick = () => openEditModal(parseInt(btn.dataset.id));
     });
     document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.onclick = () => {
         if (confirm('Видалити товар?')) {
           products = products.filter(p => p.id !== parseInt(btn.dataset.id));
           saveProducts();
           renderProductsTable();
-          showToast('Товар видалено');
+          showToast('✅ Товар видалено');
         }
-      });
+      };
     });
   }
 
-  // Додавання товару
-  function addProduct() {
-    const emoji = document.getElementById('newEmoji').value || '🎁';
-    const name = document.getElementById('newName').value;
-    const price = parseInt(document.getElementById('newPrice').value);
-    const oldPrice = document.getElementById('newOldPrice').value ? parseInt(document.getElementById('newOldPrice').value) : null;
-    const category = document.getElementById('newCategory').value;
-    const isHit = document.getElementById('newIsHit').checked;
-    const description = document.getElementById('newDescription').value;
-    const featuresStr = document.getElementById('newFeatures').value;
-    
-    if (!name || !price) {
-      showToast('Будь ласка, заповніть назву та ціну', true);
-      return;
-    }
-    
-    const newId = Math.max(...products.map(p => p.id), 0) + 1;
-    const newProduct = {
-      id: newId,
-      name: name,
-      price: price,
-      oldPrice: oldPrice,
-      emoji: emoji,
-      category: category,
-      isHit: isHit,
-      description: description || 'Святковий товар високої якості. Деталі уточнюйте в Instagram.',
-      features: featuresStr ? featuresStr.split(',').map(f => f.trim()).filter(f => f) : []
-    };
-    
-    products.push(newProduct);
-    saveProducts();
-    renderProductsTable();
-    
-    document.getElementById('newName').value = '';
-    document.getElementById('newPrice').value = '';
-    document.getElementById('newOldPrice').value = '';
-    document.getElementById('newDescription').value = '';
-    document.getElementById('newFeatures').value = '';
-    document.getElementById('newIsHit').checked = false;
-    document.getElementById('newEmoji').value = '🎁';
-    
-    showToast(`✅ Товар "${name}" додано!`);
-  }
-
-  // Редагування товару
-  let editingId = null;
   function openEditModal(id) {
-    const product = products.find(p => p.id === id);
-    if (!product) return;
-    editingId = id;
-    
+    const p = products.find(p => p.id === id);
+    if (!p) return;
     const container = document.getElementById('editFormContainer');
     container.innerHTML = `
-      <div class="modal-form-group">
-        <label><i class="fas fa-image"></i> Емодзі</label>
-        <input type="text" id="editEmoji" value="${product.emoji}">
-      </div>
-      <div class="modal-form-group">
-        <label><i class="fas fa-tag"></i> Назва товару</label>
-        <input type="text" id="editName" value="${product.name.replace(/"/g, '&quot;')}">
-      </div>
-      <div class="modal-form-group">
-        <label><i class="fas fa-dollar-sign"></i> Звичайна ціна (грн)</label>
-        <input type="number" id="editPrice" value="${product.price}">
-      </div>
-      <div class="modal-form-group">
-        <label><i class="fas fa-percent"></i> Акційна ціна (грн)</label>
-        <input type="number" id="editOldPrice" value="${product.oldPrice || ''}">
-      </div>
-      <div class="modal-form-group">
-        <label><i class="fas fa-list"></i> Категорія</label>
-        <select id="editCategory">
-          <option value="costumes" ${product.category === 'costumes' ? 'selected' : ''}>🦸 Костюми</option>
-          <option value="gifts" ${product.category === 'gifts' ? 'selected' : ''}>🎁 Подарунки</option>
-          <option value="birthday" ${product.category === 'birthday' ? 'selected' : ''}>🎂 День народження</option>
-          <option value="decor" ${product.category === 'decor' ? 'selected' : ''}>🎊 Декор</option>
-          <option value="edible" ${product.category === 'edible' ? 'selected' : ''}>🍬 Їстівні букети</option>
-          <option value="balloons" ${product.category === 'balloons' ? 'selected' : ''}>🎈 Шари</option>
+      <div><label>Емодзі:</label><input type="text" id="editEmoji" value="${p.emoji}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
+      <div><label>Назва:</label><input type="text" id="editName" value="${p.name.replace(/"/g, '&quot;')}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
+      <div><label>Ціна:</label><input type="number" id="editPrice" value="${p.price}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
+      <div><label>Акційна ціна:</label><input type="number" id="editOldPrice" value="${p.oldPrice || ''}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
+      <div><label>Категорія:</label>
+        <select id="editCategory" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;">
+          <option value="costumes" ${p.category === 'costumes' ? 'selected' : ''}>🦸 Костюми</option>
+          <option value="gifts" ${p.category === 'gifts' ? 'selected' : ''}>🎁 Подарунки</option>
+          <option value="birthday" ${p.category === 'birthday' ? 'selected' : ''}>🎂 День народження</option>
+          <option value="decor" ${p.category === 'decor' ? 'selected' : ''}>🎊 Декор</option>
+          <option value="edible" ${p.category === 'edible' ? 'selected' : ''}>🍬 Їстівні букети</option>
+          <option value="balloons" ${p.category === 'balloons' ? 'selected' : ''}>🎈 Шари</option>
         </select>
       </div>
-      <div class="modal-form-group" style="display:flex; align-items:center; gap:12px;">
-        <label>🔥 Хіт продажу</label>
-        <input type="checkbox" id="editIsHit" ${product.isHit ? 'checked' : ''}>
-      </div>
-      <div class="modal-form-group">
-        <label><i class="fas fa-align-left"></i> Опис товару</label>
-        <textarea id="editDescription" rows="4">${product.description || ''}</textarea>
-      </div>
-      <div class="modal-form-group">
-        <label><i class="fas fa-list-ul"></i> Характеристики (через кому)</label>
-        <textarea id="editFeatures" rows="3">${product.features ? product.features.join(', ') : ''}</textarea>
-      </div>
-      <button class="modal-save-btn" id="saveEditBtn"><i class="fas fa-save"></i> Зберегти зміни</button>
+      <div style="margin:10px 0;"><label><input type="checkbox" id="editIsHit" ${p.isHit ? 'checked' : ''}> 🔥 Хіт продажу</label></div>
+      <div><label>Опис:</label><textarea id="editDescription" rows="3" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;">${p.description || ''}</textarea></div>
+      <div><label>Характеристики (через кому):</label><textarea id="editFeatures" rows="2" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;">${p.features ? p.features.join(', ') : ''}</textarea></div>
+      <button class="modal-save-btn" id="saveEditBtn">💾 Зберегти</button>
     `;
-    
-    document.getElementById('saveEditBtn').addEventListener('click', () => {
-      const index = products.findIndex(p => p.id === editingId);
-      if (index !== -1) {
-        const featuresStr = document.getElementById('editFeatures').value;
-        products[index] = {
-          id: editingId,
+    document.getElementById('saveEditBtn').onclick = () => {
+      const idx = products.findIndex(prod => prod.id === id);
+      if (idx !== -1) {
+        products[idx] = {
+          id: id,
           name: document.getElementById('editName').value,
           price: parseInt(document.getElementById('editPrice').value) || 0,
           oldPrice: document.getElementById('editOldPrice').value ? parseInt(document.getElementById('editOldPrice').value) : null,
@@ -828,93 +606,88 @@
           category: document.getElementById('editCategory').value,
           isHit: document.getElementById('editIsHit').checked,
           description: document.getElementById('editDescription').value,
-          features: featuresStr ? featuresStr.split(',').map(f => f.trim()).filter(f => f) : []
+          features: document.getElementById('editFeatures').value.split(',').map(f => f.trim()).filter(f => f)
         };
       }
       saveProducts();
       renderProductsTable();
       document.getElementById('editModal').classList.remove('active');
-      showToast('✅ Товар оновлено!');
-    });
-    
+      showToast('✅ Товар оновлено');
+    };
     document.getElementById('editModal').classList.add('active');
   }
 
-  // Пошук
-  function setupSearch() {
-    const searchInput = document.getElementById('searchProducts');
-    const searchBtn = document.getElementById('searchBtn');
-    
-    searchBtn.addEventListener('click', () => {
-      searchQuery = searchInput.value;
-      renderProductsTable();
+  function addProduct() {
+    const name = document.getElementById('newName').value;
+    const price = parseInt(document.getElementById('newPrice').value);
+    if (!name || !price) {
+      showToast('❌ Заповніть назву та ціну', true);
+      return;
+    }
+    const newId = Math.max(...products.map(p => p.id), 0) + 1;
+    products.push({
+      id: newId,
+      name: name,
+      price: price,
+      oldPrice: document.getElementById('newOldPrice').value ? parseInt(document.getElementById('newOldPrice').value) : null,
+      emoji: document.getElementById('newEmoji').value || '🎁',
+      category: document.getElementById('newCategory').value,
+      isHit: document.getElementById('newIsHit').checked,
+      description: document.getElementById('newDescription').value,
+      features: document.getElementById('newFeatures').value.split(',').map(f => f.trim()).filter(f => f)
     });
-    
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        searchQuery = searchInput.value;
-        renderProductsTable();
-      }
-    });
+    saveProducts();
+    renderProductsTable();
+    document.getElementById('newName').value = '';
+    document.getElementById('newPrice').value = '';
+    document.getElementById('newOldPrice').value = '';
+    document.getElementById('newDescription').value = '';
+    document.getElementById('newFeatures').value = '';
+    document.getElementById('newIsHit').checked = false;
+    document.getElementById('newEmoji').value = '🎁';
+    showToast(`✅ Товар "${name}" додано!`);
   }
 
   // ЛОГІН
-  function showLoginModal() {
-    const modal = document.createElement('div');
-    modal.className = 'login-modal';
-    modal.innerHTML = `
-      <div class="login-box">
-        <h2><i class="fas fa-user-shield"></i> Вхід в адмінку</h2>
-        <input type="text" id="loginUsername" placeholder="Логін" autocomplete="off">
-        <input type="password" id="loginPassword" placeholder="Пароль">
-        <button class="login-btn" id="doLoginBtn">Увійти</button>
-        <div id="loginError" class="error-msg"></div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-    document.getElementById('doLoginBtn').onclick = () => {
-      const login = document.getElementById('loginUsername').value;
-      const pwd = document.getElementById('loginPassword').value;
-      if (login === '1111' && pwd === '1111') {
-        isLoggedIn = true;
-        modal.remove();
-        document.getElementById('adminContainer').style.display = 'block';
+  function initLogin() {
+    const loginOverlay = document.getElementById('loginOverlay');
+    const adminContainer = document.getElementById('adminContainer');
+    const loginBtn = document.getElementById('doLoginBtn');
+    const loginUser = document.getElementById('loginUsername');
+    const loginPass = document.getElementById('loginPassword');
+    const errorMsg = document.getElementById('loginError');
+
+    loginBtn.onclick = () => {
+      if (loginUser.value === '1111' && loginPass.value === '1111') {
+        loginOverlay.style.display = 'none';
+        adminContainer.style.display = 'block';
         loadProducts();
         renderProductsTable();
-        showToast('Вхід виконано! Ласкаво просимо в адмін-панель');
+        showToast('Ласкаво просимо в адмін-панель! 🎉');
       } else {
-        document.getElementById('loginError').textContent = 'Невірний логін або пароль';
+        errorMsg.textContent = 'Невірний логін або пароль';
       }
     };
   }
 
-  // Перехід на головну
-  function goToHome() {
-    window.location.href = 'index.html';
-  }
+  // ПОДІЇ
+  document.getElementById('addProductBtn').onclick = addProduct;
+  document.getElementById('searchBtn').onclick = () => {
+    searchQuery = document.getElementById('searchProducts').value;
+    renderProductsTable();
+  };
+  document.getElementById('searchProducts').onkeyup = () => {
+    searchQuery = document.getElementById('searchProducts').value;
+    renderProductsTable();
+  };
+  document.getElementById('goToSiteBtn').onclick = () => window.location.href = 'index.html';
+  document.getElementById('backHomeBtn').onclick = () => window.history.back();
 
-  function goBack() {
-    window.history.back();
-  }
+  const modal = document.getElementById('editModal');
+  document.querySelector('.modal-close').onclick = () => modal.classList.remove('active');
+  modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
 
-  // Ініціалізація
-  document.addEventListener('DOMContentLoaded', () => {
-    showLoginModal();
-    
-    document.getElementById('addProductBtn').addEventListener('click', addProduct);
-    document.getElementById('goToSiteBtn').addEventListener('click', goToHome);
-    document.getElementById('backHomeBtn').addEventListener('click', goBack);
-    
-    setupSearch();
-    
-    const modal = document.getElementById('editModal');
-    document.querySelector('.modal-close').addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('active');
-    });
-  });
+  initLogin();
 </script>
 </body>
 </html>
