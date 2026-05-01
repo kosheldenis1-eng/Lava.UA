@@ -673,25 +673,35 @@
     { emoji: "📦", name: "Коробка", price: "від 59 грн", sub: "З кришкою" }
   ];
 
-  // Завантаження товарів з localStorage
-  function loadProducts() {
-    const saved = localStorage.getItem('svyatolab_products');
-    if (saved) {
-      products = JSON.parse(saved);
-    } else {
-      // Дефолтні товари, якщо немає в localStorage
-      products = [
-        { id: 1, name: "Костюм Супергероя", price: 350, oldPrice: null, imageType: "emoji", imageValue: "🦸", imageWidth: 160, imageHeight: 160, category: "costumes", isHit: true, description: "Костюм супергероя. Розміри S-XXL. Оренда 1 день.", features: ["Розміри S-XXL", "Маска в комплекті"] },
-        { id: 2, name: "Костюм Принцеси", price: 320, oldPrice: null, imageType: "emoji", imageValue: "👸", imageWidth: 160, imageHeight: 160, category: "costumes", isHit: false, description: "Чарівний костюм принцеси. Корона в комплекті.", features: ["Корона", "Пишна спідниця"] },
-        { id: 3, name: "Подарункова коробка", price: 79, oldPrice: 129, imageType: "emoji", imageValue: "📦", imageWidth: 160, imageHeight: 160, category: "gifts", isHit: true, description: "Елегантна коробка з кришкою.", features: ["З кришкою", "Стрічка"] },
-        { id: 4, name: "Набір кульок 'Веселка'", price: 129, oldPrice: 179, imageType: "emoji", imageValue: "🎈", imageWidth: 160, imageHeight: 160, category: "balloons", isHit: true, description: "50 кульок різних кольорів.", features: ["50 кульок", "10 кольорів"] }
-      ];
-      saveProducts();
-    }
-  }
-
+  // Збереження товарів в localStorage (кеш)
   function saveProducts() {
     localStorage.setItem('svyatolab_products', JSON.stringify(products));
+  }
+
+  // ЗАВАНТАЖЕННЯ ТОВАРІВ З products.json (ГОЛОВНЕ ДЖЕРЕЛО)
+  async function loadProducts() {
+    try {
+      const response = await fetch('products.json');
+      if (response.ok) {
+        products = await response.json();
+        saveProducts(); // зберігаємо в localStorage для швидкості
+        console.log('✅ Товари завантажено з products.json');
+      } else {
+        throw new Error('Файл products.json не знайдено');
+      }
+    } catch (error) {
+      console.error('❌ Помилка завантаження products.json:', error);
+      // Якщо products.json немає, пробуємо взяти з localStorage
+      const saved = localStorage.getItem('svyatolab_products');
+      if (saved && saved !== '[]') {
+        products = JSON.parse(saved);
+        console.log('📦 Товари завантажено з localStorage');
+      } else {
+        products = [];
+        console.log('⚠️ Немає товарів. Додайте товари через адмінку і завантажте products.json на GitHub');
+      }
+    }
+    refreshAll();
   }
 
   // Відображення зображення товару
@@ -924,7 +934,6 @@
   // ПОДІЇ
   document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
-    refreshAll();
     setupCatalogFilters();
     setupHomeFilters();
     
