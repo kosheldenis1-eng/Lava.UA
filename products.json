@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Костюм Супергероя",
+    "price": 350,
+    "oldPrice": null,
+    "imageType": "emoji",
+    "imageValue": "🦸",
+    "imageWidth": 160,
+    "imageHeight": 160,
+    "category": "costumes",
+    "isHit": true,
+    "description": "Костюм супергероя. Розміри S-XXL. Оренда 1 день.",
+    "features": ["Розміри S-XXL", "Маска в комплекті"]
+  },
+  {
+    "id": 2,
+    "name": "Костюм Принцеси",
+    "price": 320,
+    "oldPrice": null,
+    "imageType": "emoji",
+    "imageValue": "👸",
+    "imageWidth": 160,
+    "imageHeight": 160,
+    "category": "costumes",
+    "isHit": false,
+    "description": "Чарівний костюм принцеси. Корона в комплекті.",
+    "features": ["Корона", "Пишна спідниця"]
+  },
+  {
+    "id": 3,
+    "name": "Подарункова коробка",
+    "price": 79,
+    "oldPrice": 129,
+    "imageType": "emoji",
+    "imageValue": "📦",
+    "imageWidth": 160,
+    "imageHeight": 160,
+    "category": "gifts",
+    "isHit": true,
+    "description": "Елегантна коробка з кришкою.",
+    "features": ["З кришкою", "Стрічка"]
+  },
+  {
+    "id": 4,
+    "name": "Набір кульок 'Веселка'",
+    "price": 129,
+    "oldPrice": 179,
+    "imageType": "emoji",
+    "imageValue": "🎈",
+    "imageWidth": 160,
+    "imageHeight": 160,
+    "category": "balloons",
+    "isHit": true,
+    "description": "50 кульок різних кольорів.",
+    "features": ["50 кульок", "10 кольорів"]
+  }
+]
