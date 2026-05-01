@@ -152,6 +152,87 @@
     cursor: pointer;
   }
 
+  /* Стилі для завантаження фото */
+  .image-upload-section {
+    background: #f9f5ff;
+    border-radius: 28px;
+    padding: 16px;
+    margin-bottom: 8px;
+  }
+
+  .image-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .image-tab {
+    padding: 8px 16px;
+    background: #f0e9fa;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+
+  .image-tab.active {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white;
+  }
+
+  .image-preview {
+    width: 120px;
+    height: 120px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    margin-top: 12px;
+    border: 2px dashed #ddd;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .size-controls {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .size-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0e9fa;
+    padding: 6px 14px;
+    border-radius: 40px;
+  }
+
+  .size-control label {
+    font-weight: 700;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .size-control input {
+    width: 60px;
+    padding: 6px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
   .btn-submit {
     background: linear-gradient(135deg, var(--green), #00b4d8);
     color: white;
@@ -239,8 +320,19 @@
     color: var(--purple-dark);
   }
 
+  .product-image-cell {
+    width: 80px;
+  }
+
+  .product-image-cell img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
   .product-emoji {
-    font-size: 40px;
+    font-size: 45px;
   }
 
   .edit-btn, .delete-btn {
@@ -307,7 +399,7 @@
   .modal-content {
     background: white;
     border-radius: 48px;
-    max-width: 600px;
+    max-width: 650px;
     width: 90%;
     max-height: 85vh;
     overflow-y: auto;
@@ -414,6 +506,8 @@
   @media (max-width: 768px) {
     .form-grid { grid-template-columns: 1fr; }
     th, td { font-size: 12px; padding: 10px 6px; }
+    .product-image-cell { width: 60px; }
+    .product-image-cell img { width: 45px; height: 45px; }
   }
 </style>
 </head>
@@ -443,12 +537,44 @@
   <div class="add-product-form">
     <div class="form-title"><i class="fas fa-plus-circle"></i> Додати новий товар</div>
     <div class="form-grid">
-      <div class="form-group"><label>Фото (емодзі)</label><input type="text" id="newEmoji" value="🎁"></div>
-      <div class="form-group"><label>Назва товару *</label><input type="text" id="newName" placeholder="Введіть назву"></div>
-      <div class="form-group"><label>Ціна (грн) *</label><input type="number" id="newPrice" placeholder="Ціна"></div>
-      <div class="form-group"><label>Акційна ціна (грн)</label><input type="number" id="newOldPrice" placeholder="Залиште порожнім"></div>
+      <div class="form-group full-width">
+        <label><i class="fas fa-image"></i> Зображення товару</label>
+        <div class="image-upload-section">
+          <div class="image-tabs">
+            <span class="image-tab active" data-type="emoji">😊 Емодзі</span>
+            <span class="image-tab" data-type="url">🌐 URL картинки</span>
+            <span class="image-tab" data-type="file">📁 Завантажити файл</span>
+          </div>
+          <input type="text" id="newEmoji" placeholder="Введіть емодзі" value="🎁">
+          <input type="text" id="newImageUrl" placeholder="Або вставте URL картинки" style="display: none;">
+          <input type="file" id="newImageFile" accept="image/*" style="display: none;">
+          <div class="image-preview" id="newImagePreview">🎁</div>
+          <div class="size-controls">
+            <div class="size-control">
+              <label>Ширина:</label>
+              <input type="number" id="newImageWidth" value="160" placeholder="px">
+            </div>
+            <div class="size-control">
+              <label>Висота:</label>
+              <input type="number" id="newImageHeight" value="160" placeholder="px">
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="form-group">
-        <label>Категорія</label>
+        <label><i class="fas fa-tag"></i> Назва товару *</label>
+        <input type="text" id="newName" placeholder="Введіть назву">
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-dollar-sign"></i> Звичайна ціна (грн) *</label>
+        <input type="number" id="newPrice" placeholder="Ціна">
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-percent"></i> Акційна ціна (грн)</label>
+        <input type="number" id="newOldPrice" placeholder="Залиште порожнім">
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-list"></i> Категорія</label>
         <select id="newCategory">
           <option value="costumes">🦸 Костюми</option>
           <option value="gifts">🎁 Подарунки</option>
@@ -459,11 +585,17 @@
         </select>
       </div>
       <div class="form-group checkbox-group">
-        <label>🔥 Хіт продажу</label>
+        <label><i class="fas fa-fire"></i> Хіт продажу</label>
         <input type="checkbox" id="newIsHit">
       </div>
-      <div class="form-group full-width"><label>Опис товару</label><textarea id="newDescription" rows="3"></textarea></div>
-      <div class="form-group full-width"><label>Характеристики (через кому)</label><textarea id="newFeatures" rows="2"></textarea></div>
+      <div class="form-group full-width">
+        <label><i class="fas fa-align-left"></i> Опис товару</label>
+        <textarea id="newDescription" rows="3" placeholder="Детальний опис товару..."></textarea>
+      </div>
+      <div class="form-group full-width">
+        <label><i class="fas fa-list-ul"></i> Характеристики (через кому)</label>
+        <textarea id="newFeatures" rows="2" placeholder="Наприклад: Висока якість, 50 кульок, Яскраві кольори"></textarea>
+      </div>
     </div>
     <button class="btn-submit" id="addProductBtn"><i class="fas fa-plus"></i> Додати товар</button>
   </div>
@@ -479,9 +611,11 @@
     </div>
     <div class="products-table">
       <table>
-        <thead><tr><th>Фото</th><th>Назва</th><th>Ціна</th><th>Акція</th><th>Категорія</th><th>Хіт</th><th>Дії</th></tr></thead>
+        <thead>
+          <tr><th>Фото</th><th>Назва</th><th>Ціна</th><th>Акція</th><th>Категорія</th><th>Хіт</th><th>Дії</th></tr>
+        </thead>
         <tbody id="productsTableBody"></tbody>
-       </table>
+      </table>
     </div>
   </div>
 </div>
@@ -497,12 +631,10 @@
 <script>
   // ПОЧАТКОВІ ТОВАРИ
   let products = [
-    { id: 1, name: "Костюм Супергероя", price: 350, oldPrice: null, emoji: "🦸", category: "costumes", isHit: true, description: "Костюм супергероя. Розміри S-XXL. Оренда 1 день.", features: ["Розміри S-XXL", "Маска в комплекті"] },
-    { id: 2, name: "Костюм Принцеси", price: 320, oldPrice: null, emoji: "👸", category: "costumes", isHit: false, description: "Чарівний костюм принцеси. Корона в комплекті.", features: ["Корона", "Пишна спідниця"] },
-    { id: 3, name: "Подарункова коробка", price: 79, oldPrice: 129, emoji: "📦", category: "gifts", isHit: true, description: "Елегантна коробка з кришкою.", features: ["З кришкою", "Стрічка"] },
-    { id: 4, name: "Набір кульок 'Веселка'", price: 129, oldPrice: 179, emoji: "🎈", category: "balloons", isHit: true, description: "50 кульок різних кольорів.", features: ["50 кульок", "10 кольорів"] },
-    { id: 5, name: "Їстівний букет полуниці", price: 450, oldPrice: 599, emoji: "🍓", category: "edible", isHit: true, description: "Полуниця в шоколаді.", features: ["Полуниця", "Шоколад"] },
-    { id: 6, name: "Гірлянда 'Вечірка'", price: 89, oldPrice: null, emoji: "🎊", category: "decor", isHit: false, description: "Гірлянда 3 метри.", features: ["3 метри", "12 прапорців"] }
+    { id: 1, name: "Костюм Супергероя", price: 350, oldPrice: null, imageType: "emoji", imageValue: "🦸", imageWidth: 160, imageHeight: 160, category: "costumes", isHit: true, description: "Костюм супергероя. Розміри S-XXL. Оренда 1 день.", features: ["Розміри S-XXL", "Маска в комплекті"] },
+    { id: 2, name: "Костюм Принцеси", price: 320, oldPrice: null, imageType: "emoji", imageValue: "👸", imageWidth: 160, imageHeight: 160, category: "costumes", isHit: false, description: "Чарівний костюм принцеси. Корона в комплекті.", features: ["Корона", "Пишна спідниця"] },
+    { id: 3, name: "Подарункова коробка", price: 79, oldPrice: 129, imageType: "emoji", imageValue: "📦", imageWidth: 160, imageHeight: 160, category: "gifts", isHit: true, description: "Елегантна коробка з кришкою.", features: ["З кришкою", "Стрічка"] },
+    { id: 4, name: "Набір кульок 'Веселка'", price: 129, oldPrice: 179, imageType: "emoji", imageValue: "🎈", imageWidth: 160, imageHeight: 160, category: "balloons", isHit: true, description: "50 кульок різних кольорів.", features: ["50 кульок", "10 кольорів"] }
   ];
 
   let searchQuery = '';
@@ -528,12 +660,29 @@
     setTimeout(() => toast.remove(), 2500);
   }
 
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
   function getCategoryName(cat) {
     const names = {
       costumes: '🦸 Костюми', gifts: '🎁 Подарунки', birthday: '🎂 День народження',
       decor: '🎊 Декор', edible: '🍬 Їстівні букети', balloons: '🎈 Шари'
     };
     return names[cat] || cat;
+  }
+
+  function renderProductImage(product) {
+    if (product.imageType === 'url' || product.imageType === 'file') {
+      return `<img src="${product.imageValue}" style="width:${product.imageWidth || 60}px; height:${product.imageHeight || 60}px; object-fit:cover; border-radius:12px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=font-size:40px>🎁</span>'">`;
+    } else {
+      return `<span style="font-size:45px;">${product.imageValue || '🎁'}</span>`;
+    }
   }
 
   function renderProductsTable() {
@@ -545,7 +694,7 @@
     }
     tbody.innerHTML = filtered.map(p => `
       <tr>
-        <td style="font-size:40px">${p.emoji || '🎁'}</td>
+        <td class="product-image-cell">${renderProductImage(p)}</td>
         <td><strong>${p.name}</strong><br><small>${p.description?.substring(0, 40) || ''}</small></td>
         <td>${p.price} грн</td>
         <td>${p.oldPrice ? `<span class="sale-badge">-${Math.round((1 - p.price/p.oldPrice)*100)}%</span><br><span style="font-size:12px; text-decoration:line-through;">${p.oldPrice} грн</span>` : '-'}</td>
@@ -570,12 +719,26 @@
     });
   }
 
-  function openEditModal(id) {
+  async function openEditModal(id) {
     const p = products.find(p => p.id === id);
     if (!p) return;
     const container = document.getElementById('editFormContainer');
     container.innerHTML = `
-      <div><label>Емодзі:</label><input type="text" id="editEmoji" value="${p.emoji}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
+      <div class="image-upload-section">
+        <div class="image-tabs">
+          <span class="image-tab ${p.imageType === 'emoji' ? 'active' : ''}" data-type="emoji">😊 Емодзі</span>
+          <span class="image-tab ${p.imageType === 'url' ? 'active' : ''}" data-type="url">🌐 URL картинки</span>
+          <span class="image-tab ${p.imageType === 'file' ? 'active' : ''}" data-type="file">📁 Завантажити</span>
+        </div>
+        <input type="text" id="editEmoji" placeholder="Емодзі" value="${p.imageType === 'emoji' ? p.imageValue : '🎁'}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px; display: ${p.imageType === 'emoji' ? 'block' : 'none'}">
+        <input type="text" id="editImageUrl" placeholder="URL картинки" value="${p.imageType === 'url' ? p.imageValue : ''}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px; display: ${p.imageType === 'url' ? 'block' : 'none'}">
+        <input type="file" id="editImageFile" accept="image/*" style="display: ${p.imageType === 'file' ? 'block' : 'none'}">
+        <div class="image-preview" id="editImagePreview">${p.imageType === 'emoji' ? p.imageValue : (p.imageValue ? `<img src="${p.imageValue}" style="width:100%; height:100%; object-fit:cover;">` : '🎁')}</div>
+        <div class="size-controls">
+          <div class="size-control"><label>Ширина:</label><input type="number" id="editImageWidth" value="${p.imageWidth || 160}" placeholder="px"></div>
+          <div class="size-control"><label>Висота:</label><input type="number" id="editImageHeight" value="${p.imageHeight || 160}" placeholder="px"></div>
+        </div>
+      </div>
       <div><label>Назва:</label><input type="text" id="editName" value="${p.name.replace(/"/g, '&quot;')}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
       <div><label>Ціна:</label><input type="number" id="editPrice" value="${p.price}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
       <div><label>Акційна ціна:</label><input type="number" id="editOldPrice" value="${p.oldPrice || ''}" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;"></div>
@@ -594,19 +757,83 @@
       <div><label>Характеристики (через кому):</label><textarea id="editFeatures" rows="2" style="width:100%; padding:10px; margin:10px 0; border:2px solid #f0e6f5; border-radius:20px;">${p.features ? p.features.join(', ') : ''}</textarea></div>
       <button class="modal-save-btn" id="saveEditBtn">💾 Зберегти</button>
     `;
-    document.getElementById('saveEditBtn').onclick = () => {
+
+    // Налаштування вкладок
+    const tabs = container.querySelectorAll('.image-tab');
+    const emojiInput = container.querySelector('#editEmoji');
+    const urlInput = container.querySelector('#editImageUrl');
+    const fileInput = container.querySelector('#editImageFile');
+    const preview = container.querySelector('#editImagePreview');
+
+    async function updatePreview() {
+      const activeTab = container.querySelector('.image-tab.active');
+      if (!activeTab) return;
+      const type = activeTab.dataset.type;
+      if (type === 'emoji') {
+        preview.innerHTML = emojiInput.value || '🎁';
+      } else if (type === 'url') {
+        const url = urlInput.value;
+        preview.innerHTML = url ? `<img src="${url}" style="width:100%; height:100%; object-fit:cover;">` : '🌐';
+      } else if (type === 'file') {
+        const file = fileInput.files[0];
+        if (file) {
+          const base64 = await fileToBase64(file);
+          preview.innerHTML = `<img src="${base64}" style="width:100%; height:100%; object-fit:cover;">`;
+          fileInput.dataset.tempBase64 = base64;
+        }
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.onclick = () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const type = tab.dataset.type;
+        emojiInput.style.display = type === 'emoji' ? 'block' : 'none';
+        urlInput.style.display = type === 'url' ? 'block' : 'none';
+        fileInput.style.display = type === 'file' ? 'block' : 'none';
+        updatePreview();
+      };
+    });
+    emojiInput.oninput = updatePreview;
+    urlInput.oninput = updatePreview;
+    fileInput.onchange = updatePreview;
+
+    container.querySelector('#saveEditBtn').onclick = async () => {
       const idx = products.findIndex(prod => prod.id === id);
       if (idx !== -1) {
+        const activeTab = container.querySelector('.image-tab.active');
+        let imageType = 'emoji';
+        let imageValue = emojiInput.value || '🎁';
+        if (activeTab) {
+          const type = activeTab.dataset.type;
+          if (type === 'url') {
+            const url = urlInput.value;
+            if (url) { imageType = 'url'; imageValue = url; }
+          } else if (type === 'file') {
+            const file = fileInput.files[0];
+            if (file) {
+              imageType = 'file';
+              imageValue = await fileToBase64(file);
+            } else if (fileInput.dataset.tempBase64) {
+              imageType = 'file';
+              imageValue = fileInput.dataset.tempBase64;
+            }
+          }
+        }
         products[idx] = {
           id: id,
-          name: document.getElementById('editName').value,
-          price: parseInt(document.getElementById('editPrice').value) || 0,
-          oldPrice: document.getElementById('editOldPrice').value ? parseInt(document.getElementById('editOldPrice').value) : null,
-          emoji: document.getElementById('editEmoji').value || '🎁',
-          category: document.getElementById('editCategory').value,
-          isHit: document.getElementById('editIsHit').checked,
-          description: document.getElementById('editDescription').value,
-          features: document.getElementById('editFeatures').value.split(',').map(f => f.trim()).filter(f => f)
+          name: container.querySelector('#editName').value,
+          price: parseInt(container.querySelector('#editPrice').value) || 0,
+          oldPrice: container.querySelector('#editOldPrice').value ? parseInt(container.querySelector('#editOldPrice').value) : null,
+          imageType: imageType,
+          imageValue: imageValue,
+          imageWidth: parseInt(container.querySelector('#editImageWidth').value) || 160,
+          imageHeight: parseInt(container.querySelector('#editImageHeight').value) || 160,
+          category: container.querySelector('#editCategory').value,
+          isHit: container.querySelector('#editIsHit').checked,
+          description: container.querySelector('#editDescription').value,
+          features: container.querySelector('#editFeatures').value.split(',').map(f => f.trim()).filter(f => f)
         };
       }
       saveProducts();
@@ -617,20 +844,45 @@
     document.getElementById('editModal').classList.add('active');
   }
 
-  function addProduct() {
+  async function addProduct() {
+    let imageType = 'emoji';
+    let imageValue = document.getElementById('newEmoji').value || '🎁';
+    
+    const activeTab = document.querySelector('.add-product-form .image-tab.active');
+    if (activeTab) {
+      const type = activeTab.dataset.type;
+      if (type === 'url') {
+        const url = document.getElementById('newImageUrl').value;
+        if (url) {
+          imageType = 'url';
+          imageValue = url;
+        }
+      } else if (type === 'file') {
+        const file = document.getElementById('newImageFile').files[0];
+        if (file) {
+          imageType = 'file';
+          imageValue = await fileToBase64(file);
+        }
+      }
+    }
+    
     const name = document.getElementById('newName').value;
     const price = parseInt(document.getElementById('newPrice').value);
     if (!name || !price) {
-      showToast('❌ Заповніть назву та ціну', true);
+      showToast('❌ Заповніть назву та ціну');
       return;
     }
+    
     const newId = Math.max(...products.map(p => p.id), 0) + 1;
     products.push({
       id: newId,
       name: name,
       price: price,
       oldPrice: document.getElementById('newOldPrice').value ? parseInt(document.getElementById('newOldPrice').value) : null,
-      emoji: document.getElementById('newEmoji').value || '🎁',
+      imageType: imageType,
+      imageValue: imageValue,
+      imageWidth: parseInt(document.getElementById('newImageWidth').value) || 160,
+      imageHeight: parseInt(document.getElementById('newImageHeight').value) || 160,
       category: document.getElementById('newCategory').value,
       isHit: document.getElementById('newIsHit').checked,
       description: document.getElementById('newDescription').value,
@@ -638,6 +890,7 @@
     });
     saveProducts();
     renderProductsTable();
+    
     document.getElementById('newName').value = '';
     document.getElementById('newPrice').value = '';
     document.getElementById('newOldPrice').value = '';
@@ -645,7 +898,52 @@
     document.getElementById('newFeatures').value = '';
     document.getElementById('newIsHit').checked = false;
     document.getElementById('newEmoji').value = '🎁';
+    document.getElementById('newImageUrl').value = '';
+    document.getElementById('newImageFile').value = '';
+    document.getElementById('newImagePreview').innerHTML = '🎁';
+    
     showToast(`✅ Товар "${name}" додано!`);
+  }
+
+  // Налаштування форми додавання
+  function setupAddForm() {
+    const tabs = document.querySelectorAll('.add-product-form .image-tab');
+    const emojiInput = document.getElementById('newEmoji');
+    const urlInput = document.getElementById('newImageUrl');
+    const fileInput = document.getElementById('newImageFile');
+    const preview = document.getElementById('newImagePreview');
+
+    tabs.forEach(tab => {
+      tab.onclick = () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const type = tab.dataset.type;
+        emojiInput.style.display = type === 'emoji' ? 'block' : 'none';
+        urlInput.style.display = type === 'url' ? 'block' : 'none';
+        fileInput.style.display = type === 'file' ? 'block' : 'none';
+        if (type === 'emoji') preview.innerHTML = emojiInput.value || '🎁';
+        else if (type === 'url') preview.innerHTML = urlInput.value ? `<img src="${urlInput.value}" style="width:100%; height:100%; object-fit:cover;">` : '🌐';
+        else preview.innerHTML = '📁';
+      };
+    });
+    emojiInput.oninput = () => {
+      if (document.querySelector('.add-product-form .image-tab.active').dataset.type === 'emoji')
+        preview.innerHTML = emojiInput.value || '🎁';
+    };
+    urlInput.oninput = () => {
+      if (document.querySelector('.add-product-form .image-tab.active').dataset.type === 'url')
+        preview.innerHTML = urlInput.value ? `<img src="${urlInput.value}" style="width:100%; height:100%; object-fit:cover;">` : '🌐';
+    };
+    fileInput.onchange = () => {
+      if (document.querySelector('.add-product-form .image-tab.active').dataset.type === 'file') {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => preview.innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">`;
+          reader.readAsDataURL(file);
+        }
+      }
+    };
   }
 
   // ЛОГІН
@@ -663,6 +961,7 @@
         adminContainer.style.display = 'block';
         loadProducts();
         renderProductsTable();
+        setupAddForm();
         showToast('Ласкаво просимо в адмін-панель! 🎉');
       } else {
         errorMsg.textContent = 'Невірний логін або пароль';
